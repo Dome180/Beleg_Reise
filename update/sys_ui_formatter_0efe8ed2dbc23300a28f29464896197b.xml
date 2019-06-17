@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_formatter">
+    <sys_ui_formatter action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <angular_module/>
+        <formatter>route_ui_macro</formatter>
+        <name>Route Formatter</name>
+        <sys_class_name>sys_ui_formatter</sys_class_name>
+        <sys_created_by>jonas.kretzschmar</sys_created_by>
+        <sys_created_on>2019-06-17 11:04:58</sys_created_on>
+        <sys_id>0efe8ed2dbc23300a28f29464896197b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Route Formatter</sys_name>
+        <sys_package display_value="DVB_APP" source="x_339274_dvb_app">f37825d6db423300a28f2946489619df</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="DVB_APP">f37825d6db423300a28f2946489619df</sys_scope>
+        <sys_update_name>sys_ui_formatter_0efe8ed2dbc23300a28f29464896197b</sys_update_name>
+        <sys_updated_by>jonas.kretzschmar</sys_updated_by>
+        <sys_updated_on>2019-06-17 11:04:58</sys_updated_on>
+        <table>x_339274_dvb_app_reise</table>
+        <type>formatter</type>
+    </sys_ui_formatter>
+</record_update>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn">
+    <sys_rest_message_fn action="INSERT_OR_UPDATE">
+        <authentication_type>inherit_from_parent</authentication_type>
+        <basic_auth_password/>
+        <basic_auth_profile/>
+        <basic_auth_user/>
+        <content/>
+        <function_name>pointfinder</function_name>
+        <http_method>get</http_method>
+        <lock>false</lock>
+        <oauth2_profile/>
+        <protocol_name/>
+        <qualified_name>VVO  [ pointfinder ]</qualified_name>
+        <rest_endpoint>https://webapi.vvo-online.de/tr/pointfinder?format=json&amp;query=${query}</rest_endpoint>
+        <rest_message display_value="VVO ">8a7ee51edb423300a28f294648961999</rest_message>
+        <sys_class_name>sys_rest_message_fn</sys_class_name>
+        <sys_created_by>marc.seidel</sys_created_by>
+        <sys_created_on>2019-06-17 08:42:33</sys_created_on>
+        <sys_id>80ae615edb423300a28f29464896195c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>pointfinder</sys_name>
+        <sys_package display_value="DVB_APP" source="x_339274_dvb_app">f37825d6db423300a28f2946489619df</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="DVB_APP">f37825d6db423300a28f2946489619df</sys_scope>
+        <sys_update_name>sys_rest_message_fn_80ae615edb423300a28f29464896195c</sys_update_name>
+        <sys_updated_by>marc.seidel</sys_updated_by>
+        <sys_updated_on>2019-06-17 08:43:22</sys_updated_on>
+        <use_basic_auth>false</use_basic_auth>
+        <use_mid_server/>
+        <use_mutual_auth>false</use_mutual_auth>
+    </sys_rest_message_fn>
+</record_update>
