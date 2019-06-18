@@ -2,8 +2,7 @@
     <sys_ui_macro action="INSERT_OR_UPDATE">
         <active>true</active>
         <category>general</category>
-        <description>&#13;
-	&lt;j:set var="jvar_price" value="$[jvar_route.price]"&gt;&lt;/j:set&gt;</description>
+        <description/>
         <media_type/>
         <name>route_ui_macro</name>
         <scoped_name>x_339274_dvb_app_route_ui_macro</scoped_name>
@@ -11,14 +10,14 @@
         <sys_created_by>jonas.kretzschmar</sys_created_by>
         <sys_created_on>2019-06-17 10:30:37</sys_created_on>
         <sys_id>4c57c69edb823300a28f294648961945</sys_id>
-        <sys_mod_count>87</sys_mod_count>
+        <sys_mod_count>128</sys_mod_count>
         <sys_name>route_ui_macro</sys_name>
         <sys_package display_value="DVB_APP" source="x_339274_dvb_app">f37825d6db423300a28f2946489619df</sys_package>
         <sys_policy/>
         <sys_scope display_value="DVB_APP">f37825d6db423300a28f2946489619df</sys_scope>
         <sys_update_name>sys_ui_macro_4c57c69edb823300a28f294648961945</sys_update_name>
         <sys_updated_by>marc.seidel</sys_updated_by>
-        <sys_updated_on>2019-06-17 13:13:58</sys_updated_on>
+        <sys_updated_on>2019-06-17 14:32:29</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
 	
@@ -43,17 +42,23 @@
 		
 		price.innerHTML = route.price;		
 		pricelevel.innerHTML = route.pricelevel;		
-		
+		if(route.parts.length == 0) {
+			html = "Keine Route gefunden";
+		} else {
 			for(var i = 0; route.parts.length > i; i++) {
 				var part = route.parts[i];
-				html += '<div class="route__part">' +
-		'<div><span>' + part.start.time + '</span><span>' + part.start.name + '</span></div>' +
-		'<div>' + part.mot.line + ' ' + part.mot.name +  '</div>' +
-		'<div><span>' + part.end.time + '</span><span>' + part.end.name + '</span></div>' +
+			
+				html += '<div class="route__part" data-type="' + part.mot.type + '">' +
+		'<div class="route__row"><span>' + beautyDate(new Date(parseInt(part.start.time))) + '</span><span>' + part.start.name + '</span></div>' +
+		'<div class="route__row"><span>↓</span><span><span class="icon icon--bus"></span> ' + part.mot.line + ' ' + part.mot.name +  '</span></div>' +
+		'<div class="route__row"><span>' + beautyDate(new Date(parseInt(part.end.time))) + '</span><span>' + part.end.name + '</span></div>' +
 		'</div>';
 			}
+		}
 			element.innerHTML = html;
 		});
+		
+		function beautyDate(date) { if(  ! isNaN(date.getTime()) ) { return date.getHours() + ':' + (10 > date.getMinutes() ? '0' : '') + date.getMinutes(); } else return ''; }
 	</script>
 	
 	
@@ -71,6 +76,7 @@
 		
 		.route__part {
 			display: flex;
+		padding: 10px 0;
 		
 		flex: 0 0 100%;
 		flex-direction: column;
@@ -78,6 +84,36 @@
 		
 		.route__part:nth-child(even) {
 			background: #f8f8f8;
+		}
+		
+		.route__row {
+			display: flex;
+		}
+		
+		.route__row:nth-child(2) {
+			margin: 10px 0;
+		}
+		
+		.route__row span:first-child {
+			max-width: 200px;
+			flex: 0 1 30%;
+		}
+		
+		.icon {
+			display: inline-block;
+			width: 30px;
+		}
+		
+		[data-type="tram"] .icon::before {
+			content: "&#128650;";
+		}
+		
+		[data-type="rapidtransit"] .icon::before {
+			content: "&#128644;";
+		}
+		
+		[data-type="bus"] .icon::before {
+			content: "&#128652;";
 		}
 		
 		#price::before { content: "Preis: "; }		

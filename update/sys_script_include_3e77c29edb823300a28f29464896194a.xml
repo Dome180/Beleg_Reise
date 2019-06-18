@@ -42,69 +42,84 @@ VVOApi.prototype = {
 	
 	findRoute: function(origin, destination, arrival) {
 		var route = { pricelevel: 0, price: 0, parts: [] };
-		
-		try {
-			var r = new sn_ws.RESTMessageV2('x_339274_dvb_app.VVO ', 'routefinder');
-			r.setStringParameterNoEscape('origin', origin);
-			r.setStringParameterNoEscape('destination', destination);
-			r.setStringParameterNoEscape('time', arrival);
-			r.setStringParameterNoEscape('isarrivaltime', 'true');
 			
-			var response = r.execute();
-			var responseBody = response.getBody();
-			var httpStatus = response.getStatusCode();
-			
-			if(httpStatus === 200) {
+			try {
+				var r = new sn_ws.RESTMessageV2('x_339274_dvb_app.VVO ', 'routefinder');
+				r.setStringParameterNoEscape('origin', origin);
+				r.setStringParameterNoEscape('destination', destination);
+				r.setStringParameterNoEscape('time', arrival);
+				r.setStringParameterNoEscape('isarrivaltime', 'true');
 				
-				var json = JSON.parse(responseBody);
+				var response = r.execute();
+				var responseBody = response.getBody();
+				var httpStatus = response.getStatusCode();
 				
-				if(json.Status.Code === 'Ok' && json.Routes.length > 0) {
-					var first = json.Routes[0], partial = first.PartialRoutes;
+				if(httpStatus === 200) {
 					
-					route.pricelevel = first.PriceLevel;
-					route.price = first.Price;
+					var json = JSON.parse(responseBody);
 					
-					for(var i = 0; i < partial.length; i++) {
-						var part = partial[i];
+					if(json.Status.Code === 'Ok' && json.Routes.length > 0) {
+						var first = json.Routes[0], partial = first.PartialRoutes;
 						
-						route.parts.push({ mot: {
-							name: part.Mot.Direction.trim(),
-							line: part.Mot.Name,
-							type: part.Mot.Type.toLowerCase()
-						},
-						start: {
-							name: part.RegularStops[0].Name,
-							time: part.RegularStops[0].DepartureTime,
-						},
-						end: {
-							name: part.RegularStops[part.RegularStops.length - 1].Name,
-							time: part.RegularStops[part.RegularStops.length - 1].DepartureTime,
+						route.pricelevel = first.PriceLevel;
+						route.price = first.Price;
+						
+						for(var i = 0; i < partial.length; i++) {
+							var part = partial[i];
+							
+							var p = { mot: {
+								name: part.Mot.Type,
+								line: '',
+								type: part.Mot.Type.toLowerCase()
+							},
+							start: {
+								name: '',
+								time: '',
+							},
+							end: {
+								name: '',
+								time: '',
+							}
+						};
+						
+						try {
+							p.mot.name = part.Mot.Direction.trim();
+							p.mot.line = part.Mot.Name;
+							p.mot.type = part.Mot.Type.toLowerCase();
+							
+							p.start.name = part.RegularStops[0].Name + ",  " + part.RegularStops[0].Place;
+							p.start.time = part.RegularStops[0].DepartureTime.replace('/Date(', '').replace('-000)', '');
+							
+							p.end.name  = part.RegularStops[part.RegularStops.length - 1].Name + ", " + part.RegularStops[part.RegularStops.length - 1].Place;
+							p.end.time = part.RegularStops[part.RegularStops.length - 1].ArrivalTime.replace('/Date(', '').replace('-000)', '');
+							
+						} catch(e) {}
+							
+							route.parts.push(p);
 						}
-						});
+					}
 				}
 			}
-		}
-	}
-	catch(ex) {
-		var message = ex.message;
-	}
-	
-	return route;
-},
-
-type: 'VVOApi'
-};]]></script>
+			catch(ex) {
+				var message = ex.message;
+			}
+			
+			return route;
+		},
+		
+		type: 'VVOApi'
+	};]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>marc.seidel</sys_created_by>
         <sys_created_on>2019-06-17 10:31:15</sys_created_on>
         <sys_id>3e77c29edb823300a28f29464896194a</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>VVOApi</sys_name>
         <sys_package display_value="DVB_APP" source="x_339274_dvb_app">f37825d6db423300a28f2946489619df</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="DVB_APP">f37825d6db423300a28f2946489619df</sys_scope>
         <sys_update_name>sys_script_include_3e77c29edb823300a28f29464896194a</sys_update_name>
         <sys_updated_by>marc.seidel</sys_updated_by>
-        <sys_updated_on>2019-06-17 12:59:40</sys_updated_on>
+        <sys_updated_on>2019-06-17 14:08:29</sys_updated_on>
     </sys_script_include>
 </record_update>
