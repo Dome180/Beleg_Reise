@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="" label="Route" language="en" table="x_339274_dvb_app_route">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element/>
+            <help/>
+            <hint/>
+            <label>Route</label>
+            <language>en</language>
+            <name>x_339274_dvb_app_route</name>
+            <plural>Routes</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-07-01 08:59:13</sys_created_on>
+            <sys_id>b4b87932db523300a28f294648961997</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Route</sys_name>
+            <sys_package display_value="DVB_APP" source="x_339274_dvb_app">f37825d6db423300a28f2946489619df</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="DVB_APP">f37825d6db423300a28f2946489619df</sys_scope>
+            <sys_update_name>sys_documentation_x_339274_dvb_app_route__en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-07-01 08:59:13</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
